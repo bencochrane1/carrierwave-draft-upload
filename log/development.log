@@ -1,0 +1,2106 @@
+  [1m[36m (1.4ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (0.5ms)[0m  select sqlite_version(*)
+  [1m[36m (1.6ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateArticles (20150219233949)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.8ms)[0m  CREATE TABLE "articles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "text" text, "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150219233949"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+Migrating to CreateComments (20150220024105)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "commenter" varchar(255), "body" text, "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150220024105"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+Migrating to AddArticleIdToCommentsTable (20150220053815)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.3ms)[0m  ALTER TABLE "comments" ADD "article_id" integer
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150220053815"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/" for 127.0.0.1 at 2015-02-21 00:41:37 +1100
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 1885ms (Views: 1870.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/comments.css?body=1" for 127.0.0.1 at 2015-02-21 00:41:40 +1100
+
+
+Started GET "/assets/articles.css?body=1" for 127.0.0.1 at 2015-02-21 00:41:40 +1100
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-02-21 00:41:40 +1100
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-02-21 00:41:40 +1100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-02-21 00:41:40 +1100
+
+
+Started GET "/assets/welcome.css?body=1" for 127.0.0.1 at 2015-02-21 00:41:40 +1100
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-02-21 00:41:40 +1100
+
+
+Started GET "/assets/articles.js?body=1" for 127.0.0.1 at 2015-02-21 00:41:40 +1100
+
+
+Started GET "/assets/comments.js?body=1" for 127.0.0.1 at 2015-02-21 00:41:40 +1100
+
+
+Started GET "/assets/welcome.js?body=1" for 127.0.0.1 at 2015-02-21 00:41:40 +1100
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-02-21 00:41:40 +1100
+
+
+Started GET "/articles" for 127.0.0.1 at 2015-02-21 00:41:42 +1100
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.7ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 82ms (Views: 72.9ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2015-02-21 00:41:43 +1100
+Processing by ArticlesController#new as HTML
+  Rendered articles/_form.html.erb (28.0ms)
+  Rendered articles/new.html.erb within layouts/application (41.0ms)
+Completed 200 OK in 111ms (Views: 109.2ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/articles" for 127.0.0.1 at 2015-02-21 00:41:48 +1100
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"M+GnDVrcDITn7l6rdx1maWQe+CHCt6y29yG40/MzKz4=", "article"=>{"title"=>"asdfasdf", "text"=>"asdfsdfa"}, "commit"=>"Save Article"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.2ms)[0m  INSERT INTO "articles" ("created_at", "text", "title", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2015-02-20 13:41:48.010408"], ["text", "asdfsdfa"], ["title", "asdfasdf"], ["updated_at", "2015-02-20 13:41:48.010408"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/articles/1
+Completed 302 Found in 10ms (ActiveRecord: 2.1ms)
+
+
+Started GET "/articles/1" for 127.0.0.1 at 2015-02-21 00:41:48 +1100
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mArticle Load (0.2ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mComment Load (0.2ms)[0m  [1mSELECT "comments".* FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  Rendered collection (0.0ms)
+  Rendered comments/_form.html.erb (19.3ms)
+  Rendered articles/show.html.erb within layouts/application (44.7ms)
+Completed 200 OK in 130ms (Views: 127.4ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-02-23 09:57:27 +1100
+  [1m[36mActiveRecord::SchemaMigration Load (1.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 185ms (Views: 170.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/articles.css?body=1" for 127.0.0.1 at 2015-02-23 09:57:27 +1100
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-02-23 09:57:27 +1100
+
+
+Started GET "/assets/welcome.css?body=1" for 127.0.0.1 at 2015-02-23 09:57:27 +1100
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-02-23 09:57:27 +1100
+
+
+Started GET "/assets/comments.css?body=1" for 127.0.0.1 at 2015-02-23 09:57:27 +1100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-02-23 09:57:28 +1100
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-02-23 09:57:28 +1100
+
+
+Started GET "/assets/articles.js?body=1" for 127.0.0.1 at 2015-02-23 09:57:28 +1100
+
+
+Started GET "/assets/comments.js?body=1" for 127.0.0.1 at 2015-02-23 09:57:28 +1100
+
+
+Started GET "/assets/welcome.js?body=1" for 127.0.0.1 at 2015-02-23 09:57:28 +1100
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-02-23 09:57:28 +1100
+
+
+Started GET "/articles" for 127.0.0.1 at 2015-02-23 09:57:30 +1100
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.5ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (6.6ms)
+Completed 200 OK in 95ms (Views: 81.7ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/articles/1" for 127.0.0.1 at 2015-02-23 09:57:32 +1100
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.3ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mComment Load (0.6ms)[0m  SELECT "comments".* FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 1]]
+  Rendered collection (0.0ms)
+  Rendered comments/_form.html.erb (32.7ms)
+  Rendered articles/show.html.erb within layouts/application (81.9ms)
+Completed 200 OK in 149ms (Views: 144.8ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2015-02-23 09:57:34 +1100
+Processing by ArticlesController#index as HTML
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  Rendered articles/index.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 70ms (Views: 69.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/1/edit" for 127.0.0.1 at 2015-02-23 09:57:35 +1100
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mArticle Load (0.2ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered articles/_form.html.erb (2.5ms)
+  Rendered articles/edit.html.erb within layouts/application (8.2ms)
+Completed 200 OK in 86ms (Views: 84.1ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/articles" for 127.0.0.1 at 2015-02-23 09:57:39 +1100
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"M+GnDVrcDITn7l6rdx1maWQe+CHCt6y29yG40/MzKz4=", "article"=>{"title"=>"asdfasdf", "text"=>"asdfsdfajghjkg"}, "commit"=>"Save Article"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.9ms)[0m  INSERT INTO "articles" ("created_at", "text", "title", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2015-02-22 22:57:39.665504"], ["text", "asdfsdfajghjkg"], ["title", "asdfasdf"], ["updated_at", "2015-02-22 22:57:39.665504"]]
+  [1m[36m (1.1ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/articles/2
+Completed 302 Found in 7ms (ActiveRecord: 2.1ms)
+
+
+Started GET "/articles/2" for 127.0.0.1 at 2015-02-23 09:57:39 +1100
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mComment Load (0.2ms)[0m  [1mSELECT "comments".* FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 2]]
+  Rendered collection (0.0ms)
+  Rendered comments/_form.html.erb (3.6ms)
+  Rendered articles/show.html.erb within layouts/application (10.4ms)
+Completed 200 OK in 82ms (Views: 80.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/articles/2/edit" for 127.0.0.1 at 2015-02-23 09:57:42 +1100
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered articles/_form.html.erb (2.2ms)
+  Rendered articles/edit.html.erb within layouts/application (6.2ms)
+Completed 200 OK in 83ms (Views: 81.5ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/articles" for 127.0.0.1 at 2015-02-23 09:57:43 +1100
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"M+GnDVrcDITn7l6rdx1maWQe+CHCt6y29yG40/MzKz4=", "article"=>{"title"=>"asdfasdf", "text"=>"asdfsdfajghjkg"}, "commit"=>"Save Article"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "articles" ("created_at", "text", "title", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2015-02-22 22:57:43.421771"], ["text", "asdfsdfajghjkg"], ["title", "asdfasdf"], ["updated_at", "2015-02-22 22:57:43.421771"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/articles/3
+Completed 302 Found in 6ms (ActiveRecord: 1.6ms)
+
+
+Started GET "/articles/3" for 127.0.0.1 at 2015-02-23 09:57:43 +1100
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[35mArticle Load (0.2ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mComment Load (0.1ms)[0m  [1mSELECT "comments".* FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 3]]
+  Rendered collection (0.0ms)
+  Rendered comments/_form.html.erb (3.0ms)
+  Rendered articles/show.html.erb within layouts/application (7.4ms)
+Completed 200 OK in 77ms (Views: 75.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2015-02-23 09:57:44 +1100
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.2ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 82ms (Views: 80.5ms | ActiveRecord: 0.2ms)
+
+
+Started DELETE "/articles/2" for 127.0.0.1 at 2015-02-23 09:57:47 +1100
+Processing by ArticlesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"M+GnDVrcDITn7l6rdx1maWQe+CHCt6y29yG40/MzKz4=", "id"=>"2"}
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mComment Load (0.1ms)[0m  [1mSELECT "comments".* FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 2]]
+  [1m[35mSQL (0.2ms)[0m  DELETE FROM "articles" WHERE "articles"."id" = ?  [["id", 2]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/articles
+Completed 302 Found in 5ms (ActiveRecord: 1.5ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2015-02-23 09:57:47 +1100
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.2ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 88ms (Views: 86.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/new" for 127.0.0.1 at 2015-02-23 09:57:48 +1100
+Processing by ArticlesController#new as HTML
+  Rendered articles/_form.html.erb (2.0ms)
+  Rendered articles/new.html.erb within layouts/application (6.6ms)
+Completed 200 OK in 70ms (Views: 69.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/articles" for 127.0.0.1 at 2015-02-23 09:57:51 +1100
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"M+GnDVrcDITn7l6rdx1maWQe+CHCt6y29yG40/MzKz4=", "article"=>{"title"=>"", "text"=>"jgkjhg"}, "commit"=>"Save Article"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  Rendered articles/_form.html.erb (4.5ms)
+  Rendered articles/new.html.erb within layouts/application (8.2ms)
+Completed 200 OK in 86ms (Views: 81.8ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/articles" for 127.0.0.1 at 2015-02-23 09:57:54 +1100
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"M+GnDVrcDITn7l6rdx1maWQe+CHCt6y29yG40/MzKz4=", "article"=>{"title"=>"ihlkhlkh", "text"=>"jgkjhg"}, "commit"=>"Save Article"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "articles" ("created_at", "text", "title", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", "2015-02-22 22:57:54.363753"], ["text", "jgkjhg"], ["title", "ihlkhlkh"], ["updated_at", "2015-02-22 22:57:54.363753"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/articles/4
+Completed 302 Found in 6ms (ActiveRecord: 1.4ms)
+
+
+Started GET "/articles/4" for 127.0.0.1 at 2015-02-23 09:57:54 +1100
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[35mArticle Load (0.2ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mComment Load (0.1ms)[0m  [1mSELECT "comments".* FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 4]]
+  Rendered collection (0.0ms)
+  Rendered comments/_form.html.erb (2.8ms)
+  Rendered articles/show.html.erb within layouts/application (6.8ms)
+Completed 200 OK in 83ms (Views: 81.0ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/articles/4/comments" for 127.0.0.1 at 2015-02-23 09:57:59 +1100
+Processing by CommentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"M+GnDVrcDITn7l6rdx1maWQe+CHCt6y29yG40/MzKz4=", "comment"=>{"commenter"=>"utguytu", "body"=>"kuytuyfjfjf"}, "commit"=>"Create Comment", "article_id"=>"4"}
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "comments" ("article_id", "body", "commenter", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["article_id", 4], ["body", "kuytuyfjfjf"], ["commenter", "utguytu"], ["created_at", "2015-02-22 22:57:59.983720"], ["updated_at", "2015-02-22 22:57:59.983720"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/articles/4
+Completed 302 Found in 6ms (ActiveRecord: 1.4ms)
+
+
+Started GET "/articles/4" for 127.0.0.1 at 2015-02-23 09:57:59 +1100
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[35mArticle Load (0.2ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mComment Load (0.2ms)[0m  [1mSELECT "comments".* FROM "comments"  WHERE "comments"."article_id" = ?[0m  [["article_id", 4]]
+  Rendered comments/_comment.html.erb (1.0ms)
+  Rendered comments/_form.html.erb (2.2ms)
+  Rendered articles/show.html.erb within layouts/application (14.2ms)
+Completed 200 OK in 87ms (Views: 84.6ms | ActiveRecord: 0.4ms)
+
+
+Started DELETE "/articles/4/comments/1" for 127.0.0.1 at 2015-02-23 09:58:02 +1100
+Processing by CommentsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"M+GnDVrcDITn7l6rdx1maWQe+CHCt6y29yG40/MzKz4=", "article_id"=>"4", "id"=>"1"}
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mComment Load (0.2ms)[0m  [1mSELECT  "comments".* FROM "comments"  WHERE "comments"."article_id" = ? AND "comments"."id" = ? LIMIT 1[0m  [["article_id", 4], ["id", 1]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mDELETE FROM "comments" WHERE "comments"."id" = ?[0m  [["id", 1]]
+  [1m[35m (0.8ms)[0m  commit transaction
+Redirected to http://localhost:3000/articles/4
+Completed 302 Found in 5ms (ActiveRecord: 1.5ms)
+
+
+Started GET "/articles/4" for 127.0.0.1 at 2015-02-23 09:58:02 +1100
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35mComment Load (0.1ms)[0m  SELECT "comments".* FROM "comments"  WHERE "comments"."article_id" = ?  [["article_id", 4]]
+  Rendered collection (0.1ms)
+  Rendered comments/_form.html.erb (3.4ms)
+  Rendered articles/show.html.erb within layouts/application (8.2ms)
+Completed 200 OK in 82ms (Views: 79.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/articles" for 127.0.0.1 at 2015-02-23 09:58:06 +1100
+Processing by ArticlesController#index as HTML
+  [1m[36mArticle Load (0.3ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  Rendered articles/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 80ms (Views: 79.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/articles" for ::1 at 2015-02-23 10:00:25 +1100
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.2ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (11.0ms)
+Completed 200 OK in 234ms (Views: 211.0ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/articles.css?body=1" for ::1 at 2015-02-23 10:00:25 +1100
+
+
+Started GET "/assets/application.css?body=1" for ::1 at 2015-02-23 10:00:25 +1100
+
+
+Started GET "/assets/welcome.css?body=1" for ::1 at 2015-02-23 10:00:25 +1100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for ::1 at 2015-02-23 10:00:25 +1100
+
+
+Started GET "/assets/jquery.js?body=1" for ::1 at 2015-02-23 10:00:25 +1100
+
+
+Started GET "/assets/comments.css?body=1" for ::1 at 2015-02-23 10:00:25 +1100
+
+
+Started GET "/assets/turbolinks.js?body=1" for ::1 at 2015-02-23 10:00:25 +1100
+
+
+Started GET "/assets/articles.js?body=1" for ::1 at 2015-02-23 10:00:25 +1100
+
+
+Started GET "/assets/comments.js?body=1" for ::1 at 2015-02-23 10:00:25 +1100
+
+
+Started GET "/assets/welcome.js?body=1" for ::1 at 2015-02-23 10:00:25 +1100
+
+
+Started GET "/assets/application.js?body=1" for ::1 at 2015-02-23 10:00:25 +1100
+
+
+Started GET "/articles/3/edit" for ::1 at 2015-02-23 10:00:27 +1100
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 3]]
+  Rendered articles/_form.html.erb (25.7ms)
+  Rendered articles/edit.html.erb within layouts/application (35.4ms)
+Completed 200 OK in 135ms (Views: 119.3ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/articles" for ::1 at 2015-02-23 10:00:30 +1100
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FtR1TN0JSOdEgmb9CiDrf/+on4GXnGmx+Be8HVTrlPAlNdJBh9VEY6NsOFZ9PY0Wm7ZnoFUrxQcPNgTOp9i/zg==", "article"=>{"title"=>"asdfasdfjgjkh", "text"=>"asdfsdfajghjkg"}, "commit"=>"Save Article"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "articles" ("title", "text", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["title", "asdfasdfjgjkh"], ["text", "asdfsdfajghjkg"], ["created_at", "2015-02-22 23:00:30.814485"], ["updated_at", "2015-02-22 23:00:30.814485"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+Redirected to http://localhost:3000/articles/5
+Completed 302 Found in 7ms (ActiveRecord: 1.5ms)
+
+
+Started GET "/articles/5" for ::1 at 2015-02-23 10:00:30 +1100
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 5]]
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?  [["article_id", 5]]
+  Rendered collection (0.0ms)
+  Rendered comments/_form.html.erb (13.8ms)
+  Rendered articles/show.html.erb within layouts/application (40.7ms)
+Completed 200 OK in 115ms (Views: 113.3ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/articles.css?body=1" for ::1 at 2015-02-23 10:00:30 +1100
+
+
+Started GET "/assets/comments.css?body=1" for ::1 at 2015-02-23 10:00:30 +1100
+
+
+Started GET "/assets/application.css?body=1" for ::1 at 2015-02-23 10:00:30 +1100
+
+
+Started GET "/assets/welcome.css?body=1" for ::1 at 2015-02-23 10:00:30 +1100
+
+
+Started GET "/assets/articles.js?body=1" for ::1 at 2015-02-23 10:00:31 +1100
+
+
+Started GET "/assets/comments.js?body=1" for ::1 at 2015-02-23 10:00:31 +1100
+
+
+Started GET "/assets/turbolinks.js?body=1" for ::1 at 2015-02-23 10:00:31 +1100
+
+
+Started GET "/assets/welcome.js?body=1" for ::1 at 2015-02-23 10:00:31 +1100
+
+
+Started GET "/assets/application.js?body=1" for ::1 at 2015-02-23 10:00:31 +1100
+
+
+Started POST "/articles/5/comments" for ::1 at 2015-02-23 10:00:35 +1100
+Processing by CommentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"v/4rNYVNRHHciKYrbcmF4zQSfGgznPyMOA9BvmzuwbyMH4w435FI9Ttm+IAa1OOKUAyESfErUDrPLvltn93qgg==", "comment"=>{"commenter"=>"utkg", "body"=>"kjghkjghjkl"}, "commit"=>"Create Comment", "article_id"=>"5"}
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 5]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "comments" ("commenter", "body", "article_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["commenter", "utkg"], ["body", "kjghkjghjkl"], ["article_id", 5], ["created_at", "2015-02-22 23:00:35.348211"], ["updated_at", "2015-02-22 23:00:35.348211"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+Redirected to http://localhost:3000/articles/5
+Completed 302 Found in 9ms (ActiveRecord: 1.5ms)
+
+
+Started GET "/articles/5" for ::1 at 2015-02-23 10:00:35 +1100
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 5]]
+  [1m[35mComment Load (0.1ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?  [["article_id", 5]]
+  Rendered comments/_comment.html.erb (1.0ms)
+  Rendered comments/_form.html.erb (2.1ms)
+  Rendered articles/show.html.erb within layouts/application (11.9ms)
+Completed 200 OK in 82ms (Views: 80.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/comments.css?body=1" for ::1 at 2015-02-23 10:00:35 +1100
+
+
+Started GET "/assets/articles.css?body=1" for ::1 at 2015-02-23 10:00:35 +1100
+
+
+Started GET "/assets/welcome.css?body=1" for ::1 at 2015-02-23 10:00:35 +1100
+
+
+Started GET "/assets/turbolinks.js?body=1" for ::1 at 2015-02-23 10:00:35 +1100
+
+
+Started GET "/assets/application.css?body=1" for ::1 at 2015-02-23 10:00:35 +1100
+
+
+Started GET "/assets/articles.js?body=1" for ::1 at 2015-02-23 10:00:35 +1100
+
+
+Started GET "/assets/comments.js?body=1" for ::1 at 2015-02-23 10:00:35 +1100
+
+
+Started GET "/assets/welcome.js?body=1" for ::1 at 2015-02-23 10:00:35 +1100
+
+
+Started GET "/assets/application.js?body=1" for ::1 at 2015-02-23 10:00:35 +1100
+
+
+Started GET "/articles" for ::1 at 2015-02-23 10:00:37 +1100
+Processing by ArticlesController#index as HTML
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  Rendered articles/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 81ms (Views: 79.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/4" for ::1 at 2015-02-23 10:00:38 +1100
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mComment Load (0.1ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 4]]
+  Rendered collection (0.0ms)
+  Rendered comments/_form.html.erb (3.2ms)
+  Rendered articles/show.html.erb within layouts/application (9.9ms)
+Completed 200 OK in 87ms (Views: 86.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/articles" for ::1 at 2015-02-23 10:00:40 +1100
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.2ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 72ms (Views: 70.6ms | ActiveRecord: 0.2ms)
+
+
+Started DELETE "/articles/4" for ::1 at 2015-02-23 10:00:42 +1100
+Processing by ArticlesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"q5r6JtyNwBmBpzl2NBcUG998M1D09kRvkQiXseMWnSGYe10rhlHMnWZJZ91DCnJyu2LLcTZB6NlmKS9iECW2Hw==", "id"=>"4"}
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mComment Load (0.1ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 4]]
+  [1m[35mSQL (0.4ms)[0m  DELETE FROM "articles" WHERE "articles"."id" = ?  [["id", 4]]
+  [1m[36m (2.1ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/articles
+Completed 302 Found in 8ms (ActiveRecord: 2.9ms)
+
+
+Started GET "/articles" for ::1 at 2015-02-23 10:00:42 +1100
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.2ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 87ms (Views: 85.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/articles.css?body=1" for ::1 at 2015-02-23 10:00:42 +1100
+
+
+Started GET "/assets/turbolinks.js?body=1" for ::1 at 2015-02-23 10:00:42 +1100
+
+
+Started GET "/assets/welcome.css?body=1" for ::1 at 2015-02-23 10:00:42 +1100
+
+
+Started GET "/assets/articles.js?body=1" for ::1 at 2015-02-23 10:00:42 +1100
+
+
+Started GET "/assets/comments.css?body=1" for ::1 at 2015-02-23 10:00:42 +1100
+
+
+Started GET "/assets/application.css?body=1" for ::1 at 2015-02-23 10:00:42 +1100
+
+
+Started GET "/assets/comments.js?body=1" for ::1 at 2015-02-23 10:00:42 +1100
+
+
+Started GET "/assets/welcome.js?body=1" for ::1 at 2015-02-23 10:00:42 +1100
+
+
+Started GET "/assets/application.js?body=1" for ::1 at 2015-02-23 10:00:42 +1100
+
+
+Started GET "/articles/new" for ::1 at 2015-02-23 10:00:44 +1100
+Processing by ArticlesController#new as HTML
+  Rendered articles/_form.html.erb (2.1ms)
+  Rendered articles/new.html.erb within layouts/application (6.7ms)
+Completed 200 OK in 86ms (Views: 84.9ms | ActiveRecord: 0.0ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddBackgroundColumnToArticles (20150222233652)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (2.0ms)[0m  [1mALTER TABLE "articles" ADD "background" varchar[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150222233652"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+
+
+Started GET "/articles" for ::1 at 2015-02-23 11:24:26 +1100
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ArticlesController#index as HTML
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+  [1m[35mArticle Load (0.7ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (11.0ms)
+Completed 200 OK in 157ms (Views: 128.6ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/assets/application.css?body=1" for ::1 at 2015-02-23 11:24:26 +1100
+
+
+Started GET "/assets/jquery.js?body=1" for ::1 at 2015-02-23 11:24:26 +1100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for ::1 at 2015-02-23 11:24:26 +1100
+
+
+Started GET "/assets/application.js?body=1" for ::1 at 2015-02-23 11:24:26 +1100
+
+
+Started GET "/assets/turbolinks.js?body=1" for ::1 at 2015-02-23 11:24:26 +1100
+
+
+Started GET "/" for ::1 at 2015-02-23 11:24:28 +1100
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 51ms (Views: 49.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for ::1 at 2015-02-23 11:24:28 +1100
+
+
+Started GET "/assets/application.js?body=1" for ::1 at 2015-02-23 11:24:28 +1100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for ::1 at 2015-02-23 11:24:28 +1100
+
+
+Started GET "/assets/jquery.js?body=1" for ::1 at 2015-02-23 11:24:28 +1100
+
+
+Started GET "/assets/turbolinks.js?body=1" for ::1 at 2015-02-23 11:24:28 +1100
+
+
+Started GET "/articles" for ::1 at 2015-02-23 11:24:30 +1100
+Processing by ArticlesController#index as HTML
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  Rendered articles/index.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 46ms (Views: 43.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/new" for ::1 at 2015-02-23 11:24:32 +1100
+Processing by ArticlesController#new as HTML
+  Rendered articles/_form.html.erb (30.1ms)
+  Rendered articles/new.html.erb within layouts/application (39.8ms)
+Completed 200 OK in 83ms (Views: 81.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/articles" for ::1 at 2015-02-23 11:25:00 +1100
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UYxxLcoulftxY8LA8B1NJrzwPp14FxeNUv2R8LqR3nNibdYgkPKZf5aNnGuHACtP2O7GvLqguzul3CkjSaL1TQ==", "article"=>{"title"=>"blog with image", "text"=>"here's the image...", "background"=>#<ActionDispatch::Http::UploadedFile:0x007fe1bd8f88c8 @tempfile=#<Tempfile:/var/folders/5z/6pbjb16j7hs8zxtp44np0qd00000gn/T/RackMultipart20150223-9622-3q61w6.png>, @original_filename="favicon.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"article[background]\"; filename=\"favicon.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Save Article"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+Completed 500 Internal Server Error in 16ms
+
+NoMethodError (undefined method `image' for #<Article:0x007fe1bd8d94f0>):
+  app/controllers/articles_controller.rb:22:in `create'
+
+
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (10.8ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (5.2ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (2.1ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (103.1ms)
+
+
+Started POST "/articles" for ::1 at 2015-02-23 11:25:20 +1100
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UYxxLcoulftxY8LA8B1NJrzwPp14FxeNUv2R8LqR3nNibdYgkPKZf5aNnGuHACtP2O7GvLqguzul3CkjSaL1TQ==", "article"=>{"title"=>"blog with image", "text"=>"here's the image...", "background"=>#<ActionDispatch::Http::UploadedFile:0x007fe1bc7b3978 @tempfile=#<Tempfile:/var/folders/5z/6pbjb16j7hs8zxtp44np0qd00000gn/T/RackMultipart20150223-9622-1ipfhzc.png>, @original_filename="favicon.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"article[background]\"; filename=\"favicon.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Save Article"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+Completed 500 Internal Server Error in 5ms
+
+NoMethodError (undefined method `image' for #<Article:0x007fe1bc7903b0>):
+  app/controllers/articles_controller.rb:22:in `create'
+
+
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (11.0ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (4.2ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (2.3ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (2.0ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (96.8ms)
+
+
+Started GET "/" for ::1 at 2015-02-23 11:25:37 +1100
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 115ms (Views: 103.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for ::1 at 2015-02-23 11:25:37 +1100
+
+
+Started GET "/assets/application.js?body=1" for ::1 at 2015-02-23 11:25:37 +1100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for ::1 at 2015-02-23 11:25:37 +1100
+
+
+Started GET "/assets/turbolinks.js?body=1" for ::1 at 2015-02-23 11:25:37 +1100
+
+
+Started GET "/assets/jquery.js?body=1" for ::1 at 2015-02-23 11:25:37 +1100
+
+
+Started GET "/articles" for ::1 at 2015-02-23 11:26:23 +1100
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ArticlesController#index as HTML
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+  [1m[35mArticle Load (0.7ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (12.6ms)
+Completed 200 OK in 143ms (Views: 114.6ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/articles/new" for ::1 at 2015-02-23 11:26:26 +1100
+Processing by ArticlesController#new as HTML
+  Rendered articles/_form.html.erb (29.6ms)
+  Rendered articles/new.html.erb within layouts/application (39.2ms)
+Completed 200 OK in 86ms (Views: 84.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/articles" for ::1 at 2015-02-23 11:26:43 +1100
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/UxE10Kp6IAVhegGfXH36xh0k3LKPLkVqtVK063cdpfOrePaGHXkBPJrtq0KbJGCfGprUwiLFaNd9PIAXu9dqQ==", "article"=>{"title"=>"new article with time", "text"=>"newest image", "background"=>#<ActionDispatch::Http::UploadedFile:0x007f9310e67210 @tempfile=#<Tempfile:/var/folders/5z/6pbjb16j7hs8zxtp44np0qd00000gn/T/RackMultipart20150223-9652-13hq26p.png>, @original_filename="favicon.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"article[background]\"; filename=\"favicon.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Save Article"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "articles" ("title", "text", "background", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["title", "new article with time"], ["text", "newest image"], ["background", "favicon.png"], ["created_at", "2015-02-23 00:26:43.646898"], ["updated_at", "2015-02-23 00:26:43.646898"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/articles/6
+Completed 302 Found in 21ms (ActiveRecord: 1.9ms)
+
+
+Started GET "/articles/6" for ::1 at 2015-02-23 11:26:43 +1100
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[35mArticle Load (0.3ms)[0m  SELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1  [["id", 6]]
+  [1m[36mComment Load (0.2ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 6]]
+  Rendered collection (0.0ms)
+  Rendered comments/_form.html.erb (15.6ms)
+  Rendered articles/show.html.erb within layouts/application (67.8ms)
+Completed 200 OK in 122ms (Views: 110.4ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/assets/application.css?body=1" for ::1 at 2015-02-23 11:26:43 +1100
+
+
+Started GET "/assets/application.js?body=1" for ::1 at 2015-02-23 11:26:43 +1100
+
+
+Started GET "/assets/jquery.js?body=1" for ::1 at 2015-02-23 11:26:43 +1100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for ::1 at 2015-02-23 11:26:43 +1100
+
+
+Started GET "/assets/turbolinks.js?body=1" for ::1 at 2015-02-23 11:26:43 +1100
+
+
+Started GET "/articles/6" for ::1 at 2015-02-23 11:30:38 +1100
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[35mArticle Load (0.2ms)[0m  SELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1  [["id", 6]]
+  [1m[36mComment Load (0.1ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 6]]
+  Rendered collection (0.0ms)
+  Rendered comments/_form.html.erb (2.8ms)
+  Rendered articles/show.html.erb within layouts/application (9.8ms)
+Completed 200 OK in 57ms (Views: 55.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.css?body=1" for ::1 at 2015-02-23 11:30:38 +1100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for ::1 at 2015-02-23 11:30:38 +1100
+
+
+Started GET "/assets/application.js?body=1" for ::1 at 2015-02-23 11:30:38 +1100
+
+
+Started GET "/assets/jquery.js?body=1" for ::1 at 2015-02-23 11:30:38 +1100
+
+
+Started GET "/assets/turbolinks.js?body=1" for ::1 at 2015-02-23 11:30:38 +1100
+
+
+Started GET "/articles" for ::1 at 2015-02-23 11:30:42 +1100
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.2ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 52ms (Views: 50.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/new" for ::1 at 2015-02-23 11:30:43 +1100
+Processing by ArticlesController#new as HTML
+  Rendered articles/_form.html.erb (2.9ms)
+  Rendered articles/new.html.erb within layouts/application (7.9ms)
+Completed 200 OK in 53ms (Views: 52.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/articles" for ::1 at 2015-02-23 11:31:00 +1100
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"SGjJZL4lv3t0dts3qDmt4zyC7bq3tIA0DUUs28WeIzR7iW5p5Pmz/5OYhZzfJMuKWJwVm3UDLIL6ZJQINq0ICg==", "article"=>{"title"=>"another image form", "text"=>"newer", "background"=>#<ActionDispatch::Http::UploadedFile:0x007f930d097a48 @tempfile=#<Tempfile:/var/folders/5z/6pbjb16j7hs8zxtp44np0qd00000gn/T/RackMultipart20150223-9652-1yd5qhv.png>, @original_filename="sales.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"article[background]\"; filename=\"sales.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Save Article"}
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "articles" ("title", "text", "background", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["title", "another image form"], ["text", "newer"], ["background", "sales.png"], ["created_at", "2015-02-23 00:31:00.169792"], ["updated_at", "2015-02-23 00:31:00.169792"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/articles/7
+Completed 302 Found in 10ms (ActiveRecord: 1.5ms)
+
+
+Started GET "/articles/7" for ::1 at 2015-02-23 11:31:00 +1100
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1  [["id", 7]]
+  [1m[36mComment Load (0.1ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 7]]
+  Rendered collection (0.0ms)
+  Rendered comments/_form.html.erb (2.6ms)
+  Rendered articles/show.html.erb within layouts/application (8.6ms)
+Completed 200 OK in 53ms (Views: 51.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/turbolinks.js?body=1" for ::1 at 2015-02-23 11:31:00 +1100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for ::1 at 2015-02-23 11:31:00 +1100
+
+
+Started GET "/assets/jquery.js?body=1" for ::1 at 2015-02-23 11:31:00 +1100
+
+
+Started GET "/assets/application.css?body=1" for ::1 at 2015-02-23 11:31:00 +1100
+
+
+Started GET "/assets/application.js?body=1" for ::1 at 2015-02-23 11:31:00 +1100
+
+
+Started GET "/articles" for ::1 at 2015-02-23 11:31:27 +1100
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.5ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 67ms (Views: 65.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/articles" for ::1 at 2015-02-23 11:35:02 +1100
+Processing by ArticlesController#index as HTML
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+  [1m[36mArticle Load (0.4ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  Rendered articles/index.html.erb within layouts/application (7.7ms)
+Completed 200 OK in 68ms (Views: 49.9ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/application.css?body=1" for ::1 at 2015-02-23 11:35:02 +1100
+
+
+Started GET "/assets/jquery.js?body=1" for ::1 at 2015-02-23 11:35:02 +1100
+
+
+Started GET "/assets/application.js?body=1" for ::1 at 2015-02-23 11:35:02 +1100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for ::1 at 2015-02-23 11:35:02 +1100
+
+
+Started GET "/assets/turbolinks.js?body=1" for ::1 at 2015-02-23 11:35:02 +1100
+
+
+Started GET "/articles/new" for ::1 at 2015-02-23 11:35:03 +1100
+Processing by ArticlesController#new as HTML
+  Rendered articles/_form.html.erb (2.2ms)
+  Rendered articles/new.html.erb within layouts/application (8.0ms)
+Completed 200 OK in 52ms (Views: 51.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/articles" for ::1 at 2015-02-23 11:35:28 +1100
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"XZ8dSPznYs9ceNK+YCY5lr9xUaI7XI+99280t+TRQR5ufrpFpjtuS7uWjBUXO1//22+pg/nrIwsAToxkF+JqIA==", "article"=>{"title"=>"thumb image", "text"=>"smaller thumb image", "background"=>#<ActionDispatch::Http::UploadedFile:0x007f930ff86d18 @tempfile=#<Tempfile:/var/folders/5z/6pbjb16j7hs8zxtp44np0qd00000gn/T/RackMultipart20150223-9652-10ebdco.png>, @original_filename="sales.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"article[background]\"; filename=\"sales.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Save Article"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "articles" ("title", "text", "background", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["title", "thumb image"], ["text", "smaller thumb image"], ["background", "sales.png"], ["created_at", "2015-02-23 00:35:28.708924"], ["updated_at", "2015-02-23 00:35:28.708924"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+Redirected to http://localhost:3000/articles/8
+Completed 302 Found in 255ms (ActiveRecord: 1.3ms)
+
+
+Started GET "/articles/8" for ::1 at 2015-02-23 11:35:28 +1100
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?  [["article_id", 8]]
+  Rendered collection (0.0ms)
+  Rendered comments/_form.html.erb (10.0ms)
+  Rendered articles/show.html.erb within layouts/application (22.0ms)
+Completed 200 OK in 66ms (Views: 63.5ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/application.css?body=1" for ::1 at 2015-02-23 11:35:28 +1100
+
+
+Started GET "/assets/turbolinks.js?body=1" for ::1 at 2015-02-23 11:35:28 +1100
+
+
+Started GET "/assets/application.js?body=1" for ::1 at 2015-02-23 11:35:28 +1100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for ::1 at 2015-02-23 11:35:28 +1100
+
+
+Started GET "/assets/jquery.js?body=1" for ::1 at 2015-02-23 11:35:28 +1100
+
+
+Started GET "/" for ::1 at 2015-02-23 12:32:52 +1100
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 118ms (Views: 104.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for ::1 at 2015-02-23 12:32:52 +1100
+
+
+Started GET "/assets/jquery.js?body=1" for ::1 at 2015-02-23 12:32:52 +1100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for ::1 at 2015-02-23 12:32:52 +1100
+
+
+Started GET "/assets/turbolinks.js?body=1" for ::1 at 2015-02-23 12:32:52 +1100
+
+
+Started GET "/assets/application.js?body=1" for ::1 at 2015-02-23 12:32:52 +1100
+
+
+Started GET "/articles" for ::1 at 2015-02-23 12:32:57 +1100
+Processing by ArticlesController#index as HTML
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+  [1m[35mArticle Load (0.7ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (9.8ms)
+Completed 200 OK in 92ms (Views: 76.5ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/articles/new" for ::1 at 2015-02-23 12:32:59 +1100
+Processing by ArticlesController#new as HTML
+  Rendered articles/_form.html.erb (30.3ms)
+  Rendered articles/new.html.erb within layouts/application (39.1ms)
+Completed 200 OK in 80ms (Views: 79.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/articles" for ::1 at 2015-02-23 12:33:16 +1100
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"wtMDdX+83dtUXGy9wuQCvL7YmivqRBi9uuWd002/G0bxMqR4JWDRX7OyMha1+WTV2sZiCijztAtNxCUAvowweA==", "article"=>{"title"=>"aws image", "text"=>"image to aws servers", "background"=>#<ActionDispatch::Http::UploadedFile:0x007fdc47d821d0 @tempfile=#<Tempfile:/var/folders/5z/6pbjb16j7hs8zxtp44np0qd00000gn/T/RackMultipart20150223-10506-1bkm6yp.png>, @original_filename="favicon.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"article[background]\"; filename=\"favicon.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Save Article"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (3.0ms)[0m  INSERT INTO "articles" ("title", "text", "background", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["title", "aws image"], ["text", "image to aws servers"], ["background", "favicon.png"], ["created_at", "2015-02-23 01:33:16.383827"], ["updated_at", "2015-02-23 01:33:16.383827"]]
+  [1m[36m (2.1ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/articles/9
+Completed 302 Found in 1055ms (ActiveRecord: 5.2ms)
+
+
+Started GET "/articles/9" for ::1 at 2015-02-23 12:33:17 +1100
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[35mArticle Load (0.3ms)[0m  SELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1  [["id", 9]]
+  [1m[36mComment Load (0.3ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 9]]
+  Rendered collection (0.0ms)
+  Rendered comments/_form.html.erb (14.1ms)
+  Rendered articles/show.html.erb within layouts/application (47.2ms)
+Completed 200 OK in 89ms (Views: 78.8ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for ::1 at 2015-02-23 12:33:17 +1100
+
+
+Started GET "/assets/application.css?body=1" for ::1 at 2015-02-23 12:33:17 +1100
+
+
+Started GET "/assets/jquery.js?body=1" for ::1 at 2015-02-23 12:33:17 +1100
+
+
+Started GET "/assets/application.js?body=1" for ::1 at 2015-02-23 12:33:17 +1100
+
+
+Started GET "/assets/turbolinks.js?body=1" for ::1 at 2015-02-23 12:33:17 +1100
+
+
+Started GET "/articles" for ::1 at 2015-02-23 12:34:10 +1100
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.2ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (7.5ms)
+Completed 200 OK in 51ms (Views: 49.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/9" for ::1 at 2015-02-23 12:34:12 +1100
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 9]]
+  [1m[35mComment Load (0.1ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?  [["article_id", 9]]
+  Rendered collection (0.0ms)
+  Rendered comments/_form.html.erb (3.5ms)
+  Rendered articles/show.html.erb within layouts/application (15.8ms)
+Completed 200 OK in 61ms (Views: 59.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/9" for ::1 at 2015-02-23 12:35:31 +1100
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 9]]
+  [1m[35mComment Load (0.1ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?  [["article_id", 9]]
+  Rendered collection (0.0ms)
+  Rendered comments/_form.html.erb (3.0ms)
+  Rendered articles/show.html.erb within layouts/application (8.5ms)
+Completed 200 OK in 52ms (Views: 50.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for ::1 at 2015-02-23 12:35:31 +1100
+
+
+Started GET "/assets/jquery.js?body=1" for ::1 at 2015-02-23 12:35:31 +1100
+
+
+Started GET "/assets/turbolinks.js?body=1" for ::1 at 2015-02-23 12:35:31 +1100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for ::1 at 2015-02-23 12:35:31 +1100
+
+
+Started GET "/assets/application.js?body=1" for ::1 at 2015-02-23 12:35:31 +1100
+
+
+Started GET "/articles" for ::1 at 2015-02-23 12:35:44 +1100
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ArticlesController#index as HTML
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+  [1m[35mArticle Load (0.8ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (14.1ms)
+Completed 200 OK in 135ms (Views: 109.5ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/articles/new" for ::1 at 2015-02-23 12:35:46 +1100
+Processing by ArticlesController#new as HTML
+  Rendered articles/_form.html.erb (26.2ms)
+  Rendered articles/new.html.erb within layouts/application (36.1ms)
+Completed 200 OK in 103ms (Views: 100.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/articles" for ::1 at 2015-02-23 12:36:02 +1100
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"d6QWOrMTaOLDIJggSAxoZNOVtKHUsim8h4DCA5bZZJxERbE36c9kZiTOxos/EQ4Nt4tMgBYFhQpwoXrQZepPog==", "article"=>{"title"=>"sydney aws region", "text"=>"sydney", "background"=>#<ActionDispatch::Http::UploadedFile:0x007fb2973f4930 @tempfile=#<Tempfile:/var/folders/5z/6pbjb16j7hs8zxtp44np0qd00000gn/T/RackMultipart20150223-10525-10cpzxm.png>, @original_filename="sales.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"article[background]\"; filename=\"sales.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Save Article"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "articles" ("title", "text", "background", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["title", "sydney aws region"], ["text", "sydney"], ["background", "sales.png"], ["created_at", "2015-02-23 01:36:02.540344"], ["updated_at", "2015-02-23 01:36:02.540344"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/articles/10
+Completed 302 Found in 1087ms (ActiveRecord: 2.0ms)
+
+
+Started GET "/articles/10" for ::1 at 2015-02-23 12:36:03 +1100
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mArticle Load (0.3ms)[0m  SELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1  [["id", 10]]
+  [1m[36mComment Load (0.2ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 10]]
+  Rendered collection (0.0ms)
+  Rendered comments/_form.html.erb (32.4ms)
+  Rendered articles/show.html.erb within layouts/application (64.6ms)
+Completed 200 OK in 177ms (Views: 166.0ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/application.css?body=1" for ::1 at 2015-02-23 12:36:03 +1100
+
+
+Started GET "/assets/jquery.js?body=1" for ::1 at 2015-02-23 12:36:03 +1100
+
+
+Started GET "/assets/application.js?body=1" for ::1 at 2015-02-23 12:36:03 +1100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for ::1 at 2015-02-23 12:36:03 +1100
+
+
+Started GET "/assets/turbolinks.js?body=1" for ::1 at 2015-02-23 12:36:03 +1100
+
+
+Started GET "/articles/10" for ::1 at 2015-02-23 12:40:15 +1100
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"10"}
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+  [1m[35mArticle Load (0.7ms)[0m  SELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1  [["id", 10]]
+  [1m[36mComment Load (0.7ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 10]]
+  Rendered collection (0.0ms)
+  Rendered comments/_form.html.erb (42.7ms)
+  Rendered articles/show.html.erb within layouts/application (82.8ms)
+Completed 200 OK in 255ms (Views: 199.0ms | ActiveRecord: 2.2ms)
+
+
+Started GET "/assets/application.js?body=1" for ::1 at 2015-02-23 12:40:16 +1100
+
+
+Started GET "/assets/jquery.js?body=1" for ::1 at 2015-02-23 12:40:16 +1100
+
+
+Started GET "/assets/turbolinks.js?body=1" for ::1 at 2015-02-23 12:40:16 +1100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for ::1 at 2015-02-23 12:40:16 +1100
+
+
+Started GET "/assets/application.css?body=1" for ::1 at 2015-02-23 12:40:16 +1100
+
+
+Started GET "/articles" for ::1 at 2015-02-23 12:40:18 +1100
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.2ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 54ms (Views: 52.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/new" for ::1 at 2015-02-23 12:40:19 +1100
+Processing by ArticlesController#new as HTML
+  Rendered articles/_form.html.erb (4.8ms)
+  Rendered articles/new.html.erb within layouts/application (10.7ms)
+Completed 200 OK in 53ms (Views: 52.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/articles" for ::1 at 2015-02-23 12:40:52 +1100
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ue2OKi9Sciha0qmwAhdHdqA43q5BlSn5cSy6tgIkrTuKDCkndY5+rL089xt1CiEfxCYmj4MihU+GDQJl8ReGBQ==", "article"=>{"title"=>"new image with new ruby syntax", "text"=>"ruby syntax new", "background"=>#<ActionDispatch::Http::UploadedFile:0x007fb74cbf4f40 @tempfile=#<Tempfile:/var/folders/5z/6pbjb16j7hs8zxtp44np0qd00000gn/T/RackMultipart20150223-10573-14rm6fr.png>, @original_filename="salespal.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"article[background]\"; filename=\"salespal.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Save Article"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.1ms)[0m  INSERT INTO "articles" ("title", "text", "background", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["title", "new image with new ruby syntax"], ["text", "ruby syntax new"], ["background", "salespal.png"], ["created_at", "2015-02-23 01:40:52.819793"], ["updated_at", "2015-02-23 01:40:52.819793"]]
+  [1m[36m (2.3ms)[0m  [1mrollback transaction[0m
+Completed 500 Internal Server Error in 4710ms
+
+Excon::Errors::SocketError (Bad address (Errno::EFAULT)):
+  app/controllers/articles_controller.rb:22:in `create'
+
+
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (12.3ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (11.5ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (2.3ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.2ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (111.7ms)
+
+
+Started GET "/" for ::1 at 2015-02-23 12:41:20 +1100
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 114ms (Views: 102.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for ::1 at 2015-02-23 12:41:20 +1100
+
+
+Started GET "/assets/turbolinks.js?body=1" for ::1 at 2015-02-23 12:41:20 +1100
+
+
+Started GET "/assets/application.js?body=1" for ::1 at 2015-02-23 12:41:20 +1100
+
+
+Started GET "/assets/jquery.js?body=1" for ::1 at 2015-02-23 12:41:20 +1100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for ::1 at 2015-02-23 12:41:20 +1100
+
+
+Started GET "/articles" for ::1 at 2015-02-23 12:41:22 +1100
+Processing by ArticlesController#index as HTML
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+  [1m[35mArticle Load (0.7ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (9.1ms)
+Completed 200 OK in 93ms (Views: 78.5ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/articles/new" for ::1 at 2015-02-23 12:41:24 +1100
+Processing by ArticlesController#new as HTML
+  Rendered articles/_form.html.erb (29.8ms)
+  Rendered articles/new.html.erb within layouts/application (39.5ms)
+Completed 200 OK in 85ms (Views: 84.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/articles" for ::1 at 2015-02-23 12:41:47 +1100
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"80Npq01CuHJCYXU/HoTJhdnZHznsMB5U7ISJ/FKP1qPAos6mF5609qWPK5Rpma/svcfnGC6HsuIbpTEvobz9nQ==", "article"=>{"title"=>"new with old ruby syntax", "text"=>"old ruby syntax", "background"=>#<ActionDispatch::Http::UploadedFile:0x007ff4c73948d8 @tempfile=#<Tempfile:/var/folders/5z/6pbjb16j7hs8zxtp44np0qd00000gn/T/RackMultipart20150223-10589-fw16my.png>, @original_filename="salespal.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"article[background]\"; filename=\"salespal.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Save Article"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.1ms)[0m  INSERT INTO "articles" ("title", "text", "background", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["title", "new with old ruby syntax"], ["text", "old ruby syntax"], ["background", "salespal.png"], ["created_at", "2015-02-23 01:41:47.667561"], ["updated_at", "2015-02-23 01:41:47.667561"]]
+  [1m[36m (1.5ms)[0m  [1mrollback transaction[0m
+Completed 500 Internal Server Error in 4894ms
+
+Excon::Errors::SocketError (Bad address (Errno::EFAULT)):
+  app/controllers/articles_controller.rb:22:in `create'
+
+
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (14.3ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (4.8ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.4ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.1ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (103.9ms)
+
+
+Started GET "/" for ::1 at 2015-02-23 12:43:03 +1100
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 109ms (Views: 97.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for ::1 at 2015-02-23 12:43:03 +1100
+
+
+Started GET "/assets/jquery.js?body=1" for ::1 at 2015-02-23 12:43:03 +1100
+
+
+Started GET "/assets/application.js?body=1" for ::1 at 2015-02-23 12:43:03 +1100
+
+
+Started GET "/assets/turbolinks.js?body=1" for ::1 at 2015-02-23 12:43:03 +1100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for ::1 at 2015-02-23 12:43:03 +1100
+
+
+Started GET "/" for ::1 at 2015-02-23 12:43:06 +1100
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 63ms (Views: 62.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for ::1 at 2015-02-23 12:43:06 +1100
+
+
+Started GET "/assets/jquery.js?body=1" for ::1 at 2015-02-23 12:43:06 +1100
+
+
+Started GET "/assets/turbolinks.js?body=1" for ::1 at 2015-02-23 12:43:06 +1100
+
+
+Started GET "/assets/application.js?body=1" for ::1 at 2015-02-23 12:43:06 +1100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for ::1 at 2015-02-23 12:43:06 +1100
+
+
+Started GET "/articles" for ::1 at 2015-02-23 12:43:07 +1100
+Processing by ArticlesController#index as HTML
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+  [1m[35mArticle Load (0.8ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (9.0ms)
+Completed 200 OK in 68ms (Views: 50.9ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/articles/new" for ::1 at 2015-02-23 12:43:09 +1100
+Processing by ArticlesController#new as HTML
+  Rendered articles/_form.html.erb (30.6ms)
+  Rendered articles/new.html.erb within layouts/application (40.3ms)
+Completed 200 OK in 84ms (Views: 82.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/articles" for ::1 at 2015-02-23 12:43:18 +1100
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"IU8zlqRKzwGq8DoZpNnP0Ep0KhqkRwSLqwrA5/OkttMSrpSb/pbDhU0eZLLTxKm5LmrSO2bwqD1cK3g0AJed7Q==", "article"=>{"title"=>"us region", "text"=>"asdfadsf", "background"=>#<ActionDispatch::Http::UploadedFile:0x007fc858173e28 @tempfile=#<Tempfile:/var/folders/5z/6pbjb16j7hs8zxtp44np0qd00000gn/T/RackMultipart20150223-10605-tlj0hn.png>, @original_filename="favicon.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"article[background]\"; filename=\"favicon.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Save Article"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.9ms)[0m  INSERT INTO "articles" ("title", "text", "background", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["title", "us region"], ["text", "asdfadsf"], ["background", "favicon.png"], ["created_at", "2015-02-23 01:43:18.881884"], ["updated_at", "2015-02-23 01:43:18.881884"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/articles/11
+Completed 302 Found in 1600ms (ActiveRecord: 1.9ms)
+
+
+Started GET "/articles/11" for ::1 at 2015-02-23 12:43:20 +1100
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"11"}
+  [1m[35mArticle Load (0.4ms)[0m  SELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1  [["id", 11]]
+  [1m[36mComment Load (0.2ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 11]]
+  Rendered collection (0.0ms)
+  Rendered comments/_form.html.erb (15.1ms)
+  Rendered articles/show.html.erb within layouts/application (51.8ms)
+Completed 200 OK in 95ms (Views: 84.7ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/articles" for ::1 at 2015-02-23 12:43:25 +1100
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.2ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 43ms (Views: 41.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/new" for ::1 at 2015-02-23 12:43:26 +1100
+Processing by ArticlesController#new as HTML
+  Rendered articles/_form.html.erb (2.1ms)
+  Rendered articles/new.html.erb within layouts/application (6.9ms)
+Completed 200 OK in 44ms (Views: 43.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/articles" for ::1 at 2015-02-23 12:43:39 +1100
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"iMHebq3EEvqgxi+NBA2X/cMUklhneNz1ZKeDXMC2lnm7IHlj9xgefkcocSZzEPGUpwpqeaXPcEOThjuPM4W9Rw==", "article"=>{"title"=>"new larger file", "text"=>"large file", "background"=>#<ActionDispatch::Http::UploadedFile:0x007fc8581c3568 @tempfile=#<Tempfile:/var/folders/5z/6pbjb16j7hs8zxtp44np0qd00000gn/T/RackMultipart20150223-10605-uway3f.png>, @original_filename="salespal.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"article[background]\"; filename=\"salespal.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Save Article"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "articles" ("title", "text", "background", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["title", "new larger file"], ["text", "large file"], ["background", "salespal.png"], ["created_at", "2015-02-23 01:43:40.086419"], ["updated_at", "2015-02-23 01:43:40.086419"]]
+  [1m[36m (1.7ms)[0m  [1mrollback transaction[0m
+Completed 500 Internal Server Error in 4888ms
+
+Excon::Errors::SocketError (Bad address (Errno::EFAULT)):
+  app/controllers/articles_controller.rb:22:in `create'
+
+
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (10.3ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (4.6ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (2.0ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.1ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (99.8ms)
+
+
+Started GET "/articles" for ::1 at 2015-02-23 12:44:52 +1100
+Processing by ArticlesController#index as HTML
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+  [1m[35mArticle Load (0.5ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (13.3ms)
+Completed 200 OK in 88ms (Views: 74.9ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/articles/11" for ::1 at 2015-02-23 12:44:54 +1100
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"11"}
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 11]]
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?  [["article_id", 11]]
+  Rendered collection (0.0ms)
+  Rendered comments/_form.html.erb (11.7ms)
+  Rendered articles/show.html.erb within layouts/application (24.2ms)
+Completed 200 OK in 67ms (Views: 64.4ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/articles/10" for ::1 at 2015-02-23 12:44:57 +1100
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 10]]
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?  [["article_id", 10]]
+  Rendered collection (0.0ms)
+  Rendered comments/_form.html.erb (3.8ms)
+  Rendered articles/show.html.erb within layouts/application (14.2ms)
+Completed 200 OK in 84ms (Views: 81.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/articles/9" for ::1 at 2015-02-23 12:45:00 +1100
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 9]]
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?  [["article_id", 9]]
+  Rendered collection (0.0ms)
+  Rendered comments/_form.html.erb (3.6ms)
+  Rendered articles/show.html.erb within layouts/application (13.8ms)
+Completed 200 OK in 95ms (Views: 81.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/articles/new" for ::1 at 2015-02-23 12:45:05 +1100
+Processing by ArticlesController#new as HTML
+  Rendered articles/_form.html.erb (2.1ms)
+  Rendered articles/new.html.erb within layouts/application (6.7ms)
+Completed 200 OK in 52ms (Views: 50.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/articles" for ::1 at 2015-02-23 12:46:22 +1100
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"17Vl8eeuUY/J85Jn++/gwamhTgfm/+TWeuIsS6w0vZTkVML8vXJdCy4dzMyM8oaozb+2JiRISGCNw5SYXweWqg==", "article"=>{"title"=>"ben portrait photo", "text"=>"asdfsdf", "background"=>#<ActionDispatch::Http::UploadedFile:0x007fc85a1ef738 @tempfile=#<Tempfile:/var/folders/5z/6pbjb16j7hs8zxtp44np0qd00000gn/T/RackMultipart20150223-10605-4z8kah.jpg>, @original_filename="ben-wdi.jpg", @content_type="image/jpeg", @headers="Content-Disposition: form-data; name=\"article[background]\"; filename=\"ben-wdi.jpg\"\r\nContent-Type: image/jpeg\r\n">}, "commit"=>"Save Article"}
+  [1m[36m (0.5ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.2ms)[0m  INSERT INTO "articles" ("title", "text", "background", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["title", "ben portrait photo"], ["text", "asdfsdf"], ["background", "ben-wdi.png"], ["created_at", "2015-02-23 01:46:22.770337"], ["updated_at", "2015-02-23 01:46:22.770337"]]
+  [1m[36m (2.5ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/articles/12
+Completed 302 Found in 2913ms (ActiveRecord: 4.2ms)
+
+
+Started GET "/articles/12" for ::1 at 2015-02-23 12:46:25 +1100
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"12"}
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1  [["id", 12]]
+  [1m[36mComment Load (0.1ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 12]]
+  Rendered collection (0.0ms)
+  Rendered comments/_form.html.erb (4.1ms)
+  Rendered articles/show.html.erb within layouts/application (11.1ms)
+Completed 200 OK in 59ms (Views: 57.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/articles/12/edit" for ::1 at 2015-02-23 12:47:04 +1100
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"12"}
+  [1m[35mArticle Load (0.2ms)[0m  SELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1  [["id", 12]]
+  Rendered articles/_form.html.erb (2.3ms)
+  Rendered articles/edit.html.erb within layouts/application (8.1ms)
+Completed 200 OK in 64ms (Views: 62.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles" for ::1 at 2015-02-23 12:47:06 +1100
+Processing by ArticlesController#index as HTML
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  Rendered articles/index.html.erb within layouts/application (4.6ms)
+Completed 200 OK in 51ms (Views: 49.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/12" for ::1 at 2015-02-23 12:47:08 +1100
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"12"}
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1  [["id", 12]]
+  [1m[36mComment Load (0.1ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 12]]
+  Rendered collection (0.0ms)
+  Rendered comments/_form.html.erb (2.7ms)
+  Rendered articles/show.html.erb within layouts/application (10.4ms)
+Completed 200 OK in 60ms (Views: 58.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles" for ::1 at 2015-02-23 12:47:09 +1100
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.2ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (8.1ms)
+Completed 200 OK in 52ms (Views: 51.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/new" for ::1 at 2015-02-23 12:47:10 +1100
+Processing by ArticlesController#new as HTML
+  Rendered articles/_form.html.erb (2.1ms)
+  Rendered articles/new.html.erb within layouts/application (7.6ms)
+Completed 200 OK in 56ms (Views: 54.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/articles" for ::1 at 2015-02-23 12:47:47 +1100
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Ff99PTH2o45dUjcsvj4dlmyBuXQZxaJARP4VcvzKxowmHtowayqvCrq8aYfJI3v/CJ9BVdtyDvaz362hD/ntsg==", "article"=>{"title"=>"file again", "text"=>"asdfdsfsd", "background"=>#<ActionDispatch::Http::UploadedFile:0x007fc858595a10 @tempfile=#<Tempfile:/var/folders/5z/6pbjb16j7hs8zxtp44np0qd00000gn/T/RackMultipart20150223-10605-1mhgwp4.png>, @original_filename="salespal.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"article[background]\"; filename=\"salespal.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Save Article"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "articles" ("title", "text", "background", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["title", "file again"], ["text", "asdfdsfsd"], ["background", "salespal.png"], ["created_at", "2015-02-23 01:47:47.985488"], ["updated_at", "2015-02-23 01:47:47.985488"]]
+  [1m[36m (2.0ms)[0m  [1mrollback transaction[0m
+Completed 500 Internal Server Error in 5742ms
+
+Excon::Errors::SocketError (Bad address (Errno::EFAULT)):
+  app/controllers/articles_controller.rb:22:in `create'
+
+
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (12.5ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (4.1ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.6ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.1ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (95.6ms)
+
+
+Started GET "/articles" for ::1 at 2015-02-23 12:48:04 +1100
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.2ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 50ms (Views: 49.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/new" for ::1 at 2015-02-23 12:48:05 +1100
+Processing by ArticlesController#new as HTML
+  Rendered articles/_form.html.erb (1.9ms)
+  Rendered articles/new.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 47ms (Views: 46.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/articles" for ::1 at 2015-02-23 12:48:28 +1100
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"09xHyYaGjjqSRHuFjkSPsE9ijOq6CY7VsKLh2qLeVEvgPeDE3FqCvnWqJS75WenZK3x0y3i+ImNHg1kJUe1/dQ==", "article"=>{"title"=>"new another", "text"=>"asfsdf", "background"=>#<ActionDispatch::Http::UploadedFile:0x007fc858830e50 @tempfile=#<Tempfile:/var/folders/5z/6pbjb16j7hs8zxtp44np0qd00000gn/T/RackMultipart20150223-10605-1j5srlz.png>, @original_filename="Screen Shot 2015-01-16 at 3.10.36 pm.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"article[background]\"; filename=\"Screen Shot 2015-01-16 at 3.10.36 pm.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Save Article"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "articles" ("title", "text", "background", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["title", "new another"], ["text", "asfsdf"], ["background", "Screen_Shot_2015-01-16_at_3.10.36_pm.png"], ["created_at", "2015-02-23 01:48:28.717414"], ["updated_at", "2015-02-23 01:48:28.717414"]]
+  [1m[36m (2.1ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/articles/13
+Completed 302 Found in 3084ms (ActiveRecord: 2.5ms)
+
+
+Started GET "/articles/13" for ::1 at 2015-02-23 12:48:31 +1100
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"13"}
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1  [["id", 13]]
+  [1m[36mComment Load (0.1ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 13]]
+  Rendered collection (0.0ms)
+  Rendered comments/_form.html.erb (2.9ms)
+  Rendered articles/show.html.erb within layouts/application (8.8ms)
+Completed 200 OK in 68ms (Views: 66.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for ::1 at 2015-02-23 12:50:01 +1100
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 115ms (Views: 101.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/articles" for ::1 at 2015-02-23 12:50:03 +1100
+Processing by ArticlesController#index as HTML
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+  [1m[35mArticle Load (0.3ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (9.9ms)
+Completed 200 OK in 71ms (Views: 56.5ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/articles/new" for ::1 at 2015-02-23 12:50:05 +1100
+Processing by ArticlesController#new as HTML
+  Rendered articles/_form.html.erb (28.0ms)
+  Rendered articles/new.html.erb within layouts/application (37.2ms)
+Completed 200 OK in 78ms (Views: 77.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/articles" for ::1 at 2015-02-23 12:50:19 +1100
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"fQAdxiu2+QuNMuW8TatLG2W36QN0iQ0LngXeQKpszaVO4brLcWr1j2rcuxc6ti1yAakRIrY+ob1pJGaTWV/mmw==", "article"=>{"title"=>"no region", "text"=>"asdfasdf", "background"=>#<ActionDispatch::Http::UploadedFile:0x007fd86a09fca0 @tempfile=#<Tempfile:/var/folders/5z/6pbjb16j7hs8zxtp44np0qd00000gn/T/RackMultipart20150223-10699-1ruqlxc.png>, @original_filename="salespal.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"article[background]\"; filename=\"salespal.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Save Article"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.9ms)[0m  INSERT INTO "articles" ("title", "text", "background", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["title", "no region"], ["text", "asdfasdf"], ["background", "salespal.png"], ["created_at", "2015-02-23 01:50:19.724671"], ["updated_at", "2015-02-23 01:50:19.724671"]]
+  [1m[36m (2.0ms)[0m  [1mrollback transaction[0m
+Completed 500 Internal Server Error in 5004ms
+
+Excon::Errors::SocketError (Bad address (Errno::EFAULT)):
+  app/controllers/articles_controller.rb:22:in `create'
+
+
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (14.7ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (3.9ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.7ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.3ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (106.9ms)
+
+
+Started GET "/" for ::1 at 2015-02-23 12:51:03 +1100
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 134ms (Views: 122.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/articles" for ::1 at 2015-02-23 12:51:07 +1100
+Processing by ArticlesController#index as HTML
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+  [1m[35mArticle Load (0.3ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (9.6ms)
+Completed 200 OK in 68ms (Views: 53.4ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/articles/new" for ::1 at 2015-02-23 12:51:08 +1100
+Processing by ArticlesController#new as HTML
+  Rendered articles/_form.html.erb (29.1ms)
+  Rendered articles/new.html.erb within layouts/application (38.6ms)
+Completed 200 OK in 80ms (Views: 78.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/articles" for ::1 at 2015-02-23 12:51:44 +1100
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UE8Elvgc7zOsD8r3J+JmVl83JV+8/THNyWIc/Zt8AGhjrqObosDjt0vhlFxQ/wA/Oyndfn5KnXs+Q6QuaE8rVg==", "article"=>{"title"=>"new articles", "text"=>"asdfasdfsd", "background"=>#<ActionDispatch::Http::UploadedFile:0x007fedc8897840 @tempfile=#<Tempfile:/var/folders/5z/6pbjb16j7hs8zxtp44np0qd00000gn/T/RackMultipart20150223-10713-1vqvqnx.png>, @original_filename="japan-background.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"article[background]\"; filename=\"japan-background.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Save Article"}
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "articles" ("title", "text", "background", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["title", "new articles"], ["text", "asdfasdfsd"], ["background", "japan-background.png"], ["created_at", "2015-02-23 01:51:45.321562"], ["updated_at", "2015-02-23 01:51:45.321562"]]
+  [1m[36m (2.0ms)[0m  [1mrollback transaction[0m
+Completed 500 Internal Server Error in 5187ms
+
+Excon::Errors::SocketError (Bad address (Errno::EFAULT)):
+  app/controllers/articles_controller.rb:22:in `create'
+
+
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (12.8ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (4.7ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (2.2ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (2.3ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (110.6ms)
+
+
+Started POST "/articles" for ::1 at 2015-02-23 12:52:00 +1100
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UE8Elvgc7zOsD8r3J+JmVl83JV+8/THNyWIc/Zt8AGhjrqObosDjt0vhlFxQ/wA/Oyndfn5KnXs+Q6QuaE8rVg==", "article"=>{"title"=>"new articles", "text"=>"asdfasdfsd", "background"=>#<ActionDispatch::Http::UploadedFile:0x007fedcd4fa2c8 @tempfile=#<Tempfile:/var/folders/5z/6pbjb16j7hs8zxtp44np0qd00000gn/T/RackMultipart20150223-10713-w9e340.png>, @original_filename="japan-background.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"article[background]\"; filename=\"japan-background.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Save Article"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "articles" ("title", "text", "background", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["title", "new articles"], ["text", "asdfasdfsd"], ["background", "japan-background.png"], ["created_at", "2015-02-23 01:52:01.058546"], ["updated_at", "2015-02-23 01:52:01.058546"]]
+  [1m[35m (0.6ms)[0m  rollback transaction
+Completed 500 Internal Server Error in 5203ms
+
+Excon::Errors::SocketError (Bad address (Errno::EFAULT)):
+  app/controllers/articles_controller.rb:22:in `create'
+
+
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (10.2ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (5.6ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.4ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.1ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (101.4ms)
+
+
+Started GET "/" for ::1 at 2015-02-23 12:54:16 +1100
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 49ms (Views: 47.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/articles" for ::1 at 2015-02-23 12:54:18 +1100
+Processing by ArticlesController#index as HTML
+  [1m[36mArticle Load (0.7ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  Rendered articles/index.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 86ms (Views: 84.4ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/articles/new" for ::1 at 2015-02-23 12:54:19 +1100
+Processing by ArticlesController#new as HTML
+  Rendered articles/_form.html.erb (3.6ms)
+  Rendered articles/new.html.erb within layouts/application (9.0ms)
+Completed 200 OK in 58ms (Views: 56.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/articles" for ::1 at 2015-02-23 12:54:48 +1100
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"RYInshX2oh8EA2plNlO1yICgXATS4s9wm47BfUhNTD12Y4C/Tyqum+PtNM5BTtOh5L6kJRBVY8Zsr3muu35nAw==", "article"=>{"title"=>"little file", "text"=>"asdfasdfads", "background"=>#<ActionDispatch::Http::UploadedFile:0x007fedcebae0c8 @tempfile=#<Tempfile:/var/folders/5z/6pbjb16j7hs8zxtp44np0qd00000gn/T/RackMultipart20150223-10713-1uyrcwe.png>, @original_filename="boch-fav.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"article[background]\"; filename=\"boch-fav.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Save Article"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "articles" ("title", "text", "background", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["title", "little file"], ["text", "asdfasdfads"], ["background", "boch-fav.png"], ["created_at", "2015-02-23 01:54:48.769227"], ["updated_at", "2015-02-23 01:54:48.769227"]]
+  [1m[35m (2.6ms)[0m  commit transaction
+Redirected to http://localhost:3000/articles/14
+Completed 302 Found in 1178ms (ActiveRecord: 3.4ms)
+
+
+Started GET "/articles/14" for ::1 at 2015-02-23 12:54:49 +1100
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"14"}
+  [1m[36mArticle Load (0.3ms)[0m  [1mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 14]]
+  [1m[35mComment Load (0.6ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?  [["article_id", 14]]
+  Rendered collection (0.0ms)
+  Rendered comments/_form.html.erb (16.3ms)
+  Rendered articles/show.html.erb within layouts/application (53.7ms)
+Completed 200 OK in 109ms (Views: 90.2ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/articles" for ::1 at 2015-02-23 12:56:59 +1100
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ArticlesController#index as HTML
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+Completed 500 Internal Server Error in 28ms
+
+ArgumentError (Unknown validator: 'FileSizeValidator'):
+  app/models/article.rb:8:in `<class:Article>'
+  app/models/article.rb:1:in `<top (required)>'
+  app/controllers/articles_controller.rb:4:in `index'
+
+
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (11.1ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (4.0ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (2.5ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.7ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (105.3ms)
+
+
+Started GET "/articles" for ::1 at 2015-02-23 12:57:00 +1100
+Processing by ArticlesController#index as HTML
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+Completed 500 Internal Server Error in 11ms
+
+ArgumentError (Unknown validator: 'FileSizeValidator'):
+  app/models/article.rb:8:in `<class:Article>'
+  app/models/article.rb:1:in `<top (required)>'
+  app/controllers/articles_controller.rb:4:in `index'
+
+
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (8.3ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (3.1ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.2ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (91.1ms)
+
+
+Started GET "/articles" for ::1 at 2015-02-23 13:00:17 +1100
+Processing by ArticlesController#index as HTML
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+  [1m[35mArticle Load (0.9ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (13.1ms)
+Completed 200 OK in 111ms (Views: 100.8ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for ::1 at 2015-02-23 13:00:17 +1100
+
+
+Started GET "/assets/application.css?body=1" for ::1 at 2015-02-23 13:00:17 +1100
+
+
+Started GET "/assets/application.js?body=1" for ::1 at 2015-02-23 13:00:17 +1100
+
+
+Started GET "/assets/jquery.js?body=1" for ::1 at 2015-02-23 13:00:17 +1100
+
+
+Started GET "/assets/turbolinks.js?body=1" for ::1 at 2015-02-23 13:00:17 +1100
+
+
+Started GET "/articles/14" for ::1 at 2015-02-23 13:00:21 +1100
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"14"}
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 14]]
+  [1m[35mComment Load (0.6ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?  [["article_id", 14]]
+  Rendered collection (0.0ms)
+  Rendered comments/_form.html.erb (40.7ms)
+  Rendered articles/show.html.erb within layouts/application (75.6ms)
+Completed 200 OK in 129ms (Views: 112.5ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/articles" for ::1 at 2015-02-23 13:00:44 +1100
+Processing by ArticlesController#index as HTML
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+  [1m[36mArticle Load (0.4ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  Rendered articles/index.html.erb within layouts/application (9.4ms)
+Completed 200 OK in 59ms (Views: 50.2ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/assets/jquery.js?body=1" for ::1 at 2015-02-23 13:00:44 +1100
+
+
+Started GET "/assets/application.css?body=1" for ::1 at 2015-02-23 13:00:44 +1100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for ::1 at 2015-02-23 13:00:44 +1100
+
+
+Started GET "/assets/turbolinks.js?body=1" for ::1 at 2015-02-23 13:00:44 +1100
+
+
+Started GET "/assets/application.js?body=1" for ::1 at 2015-02-23 13:00:44 +1100
+
+
+Started GET "/articles" for ::1 at 2015-02-23 13:00:52 +1100
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ArticlesController#index as HTML
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+  [1m[35mArticle Load (0.2ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (11.3ms)
+Completed 200 OK in 157ms (Views: 135.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/application.css?body=1" for ::1 at 2015-02-23 13:00:53 +1100
+
+
+Started GET "/assets/jquery.js?body=1" for ::1 at 2015-02-23 13:00:53 +1100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for ::1 at 2015-02-23 13:00:53 +1100
+
+
+Started GET "/assets/turbolinks.js?body=1" for ::1 at 2015-02-23 13:00:53 +1100
+
+
+Started GET "/assets/application.js?body=1" for ::1 at 2015-02-23 13:00:53 +1100
+
+
+Started GET "/articles/new" for ::1 at 2015-02-23 13:00:55 +1100
+Processing by ArticlesController#new as HTML
+  Rendered articles/_form.html.erb (27.2ms)
+  Rendered articles/new.html.erb within layouts/application (36.0ms)
+Completed 200 OK in 71ms (Views: 70.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/articles" for ::1 at 2015-02-23 13:01:13 +1100
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"PbklzukUpIsd3P825TMlqP+j2G4yC88nruyusUDm3fQOWILDs8ioD/oyoZ2SLkPBm70gT/C8Y5FZzRZis9X2yg==", "article"=>{"title"=>"ne removing thumbsnails", "text"=>"asdfasdf", "background"=>#<ActionDispatch::Http::UploadedFile:0x007feb07a33000 @tempfile=#<Tempfile:/var/folders/5z/6pbjb16j7hs8zxtp44np0qd00000gn/T/RackMultipart20150223-10813-1buhr6v.png>, @original_filename="boch-fav.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"article[background]\"; filename=\"boch-fav.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Save Article"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.9ms)[0m  INSERT INTO "articles" ("title", "text", "background", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["title", "ne removing thumbsnails"], ["text", "asdfasdf"], ["background", "boch-fav.png"], ["created_at", "2015-02-23 02:01:13.455574"], ["updated_at", "2015-02-23 02:01:13.455574"]]
+  [1m[36m (2.5ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/articles/15
+Completed 302 Found in 600ms (ActiveRecord: 3.6ms)
+
+
+Started GET "/articles/15" for ::1 at 2015-02-23 13:01:14 +1100
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"15"}
+  [1m[35mArticle Load (0.2ms)[0m  SELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1  [["id", 15]]
+  [1m[36mComment Load (0.2ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 15]]
+  Rendered collection (0.0ms)
+  Rendered articles/show.html.erb within layouts/application (34.2ms)
+Completed 500 Internal Server Error in 55ms
+
+ActionView::Template::Error (Version thumb doesn't exist!):
+    13:  
+    14:  <br>
+    15: 
+    16: <%= image_tag(@article.background.url(:thumb)) %>
+    17: 
+    18: 
+    19: <h2>Add a comment:</h2>
+  app/views/articles/show.html.erb:16:in `_app_views_articles_show_html_erb__4007699004237742779_70323712374480'
+
+
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (15.0ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (3.2ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (2.0ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (102.0ms)
+
+
+Started GET "/articles/15" for ::1 at 2015-02-23 13:01:35 +1100
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"15"}
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1  [["id", 15]]
+  [1m[36mComment Load (0.1ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 15]]
+  Rendered collection (0.0ms)
+  Rendered comments/_form.html.erb (14.0ms)
+  Rendered articles/show.html.erb within layouts/application (21.7ms)
+Completed 200 OK in 60ms (Views: 58.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/application.css?body=1" for ::1 at 2015-02-23 13:01:36 +1100
+
+
+Started GET "/assets/jquery.js?body=1" for ::1 at 2015-02-23 13:01:36 +1100
+
+
+Started GET "/assets/application.js?body=1" for ::1 at 2015-02-23 13:01:36 +1100
+
+
+Started GET "/assets/turbolinks.js?body=1" for ::1 at 2015-02-23 13:01:36 +1100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for ::1 at 2015-02-23 13:01:36 +1100
+
+
+Started GET "/articles" for ::1 at 2015-02-23 13:01:44 +1100
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.2ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 45ms (Views: 44.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/new" for ::1 at 2015-02-23 13:01:45 +1100
+Processing by ArticlesController#new as HTML
+  Rendered articles/_form.html.erb (2.5ms)
+  Rendered articles/new.html.erb within layouts/application (9.0ms)
+Completed 200 OK in 54ms (Views: 53.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/articles" for ::1 at 2015-02-23 13:02:00 +1100
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"aeFZWejDiaawfx6EVoJgUDHxO2OxUykS0N3l6MwzgVBaAP5Ush+FIleRQC8hnwY5Ve/DQnPkhaQn/F07PwCqbg==", "article"=>{"title"=>"large", "text"=>"asfsdfd", "background"=>#<ActionDispatch::Http::UploadedFile:0x007feb07950db8 @tempfile=#<Tempfile:/var/folders/5z/6pbjb16j7hs8zxtp44np0qd00000gn/T/RackMultipart20150223-10813-emi7qd.png>, @original_filename="salespal.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"article[background]\"; filename=\"salespal.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Save Article"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "articles" ("title", "text", "background", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["title", "large"], ["text", "asfsdfd"], ["background", "salespal.png"], ["created_at", "2015-02-23 02:02:00.072992"], ["updated_at", "2015-02-23 02:02:00.072992"]]
+  [1m[36m (2.3ms)[0m  [1mrollback transaction[0m
+Completed 500 Internal Server Error in 4225ms
+
+Excon::Errors::SocketError (Bad address (Errno::EFAULT)):
+  app/controllers/articles_controller.rb:22:in `create'
+
+
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (11.9ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (5.9ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (2.2ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (98.5ms)
+
+
+Started GET "/articles" for ::1 at 2015-02-23 13:02:53 +1100
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ArticlesController#index as HTML
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from <class:Article> at /Users/bencochrane1/ga_WDI7_new/deploy/code-candy-fileupload-draft/app/models/article.rb:6)
+  [1m[35mArticle Load (0.2ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (11.4ms)
+Completed 200 OK in 154ms (Views: 126.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/jquery.js?body=1" for ::1 at 2015-02-23 13:02:53 +1100
+
+
+Started GET "/assets/application.css?body=1" for ::1 at 2015-02-23 13:02:54 +1100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for ::1 at 2015-02-23 13:02:54 +1100
+
+
+Started GET "/assets/turbolinks.js?body=1" for ::1 at 2015-02-23 13:02:54 +1100
+
+
+Started GET "/assets/application.js?body=1" for ::1 at 2015-02-23 13:02:54 +1100
+
+
+Started GET "/articles/new" for ::1 at 2015-02-23 13:02:56 +1100
+Processing by ArticlesController#new as HTML
+  Rendered articles/_form.html.erb (32.4ms)
+  Rendered articles/new.html.erb within layouts/application (41.7ms)
+Completed 200 OK in 86ms (Views: 84.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/articles" for ::1 at 2015-02-23 13:03:08 +1100
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"rJsGXrP6KX1YfDdRqo59zrIQWZ6XlwFalcRJ6oEODPafeqFT6SYl+b+Safrdkxun1g6hv1Ugrexi5fE5cj0nyA==", "article"=>{"title"=>"large newa", "text"=>"sdfasdf", "background"=>#<ActionDispatch::Http::UploadedFile:0x007fb36b8171a0 @tempfile=#<Tempfile:/var/folders/5z/6pbjb16j7hs8zxtp44np0qd00000gn/T/RackMultipart20150223-10833-5zi6zz.png>, @original_filename="salespal.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"article[background]\"; filename=\"salespal.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Save Article"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "articles" ("title", "text", "background", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["title", "large newa"], ["text", "sdfasdf"], ["background", "salespal.png"], ["created_at", "2015-02-23 02:03:09.440993"], ["updated_at", "2015-02-23 02:03:09.440993"]]
+  [1m[36m (0.6ms)[0m  [1mrollback transaction[0m
+Completed 500 Internal Server Error in 4933ms
+
+Excon::Errors::SocketError (Bad address (Errno::EFAULT)):
+  app/controllers/articles_controller.rb:22:in `create'
+
+
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (12.9ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (4.8ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.1ms)
+  Rendered /Users/bencochrane1/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (100.6ms)
+
+
+Started GET "/articles" for ::1 at 2015-02-23 13:04:48 +1100
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.2ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 45ms (Views: 43.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for ::1 at 2015-02-23 13:04:48 +1100
+
+
+Started GET "/assets/jquery.js?body=1" for ::1 at 2015-02-23 13:04:48 +1100
+
+
+Started GET "/assets/turbolinks.js?body=1" for ::1 at 2015-02-23 13:04:48 +1100
+
+
+Started GET "/assets/application.js?body=1" for ::1 at 2015-02-23 13:04:48 +1100
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for ::1 at 2015-02-23 13:04:48 +1100
